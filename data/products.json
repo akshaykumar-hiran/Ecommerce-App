@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "image": "feature1.png",
+    "productName": "Floral Summer Dress",
+    "productPrice": 1299,
+    "ratings": 4.5,
+    "category":"Women",
+    "ratingCount": 89,
+    "ratingBreakdown": {
+      "5": 58,
+      "4": 20,
+      "3": 7,
+      "2": 3,
+      "1": 1
+    },
+    "colors": ["#FFCBA4", "#000080", "#FFFFFF"], 
+    "sizes": ["S", "M", "L"],
+    "description": "Stay breezy and stylish in this lightweight floral summer dress. Perfect for warm days, picnics, or beachside vacations with breathable comfort and charming design.",
+    "reviews": [
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Ayesha Khan",
+        "userRating": 5,
+        "comment": "This dress is just perfect! I wore it on a beach vacation and received so many compliments. The fit is amazing and fabric is soft."
+      },
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Neetu Sharma",
+        "userRating": 4,
+        "comment": "I really like the flowy design. It's comfortable to wear all day. Only wish the color was a little brighter, but overall happy."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "image": "feature2.png",
+    "productName": "Chiffon Ruffle Top",
+    "productPrice": 899,
+    "ratings": 4.2,
+    "category":"Women",
+    "ratingCount": 76,
+    "ratingBreakdown": {
+      "5": 40,
+      "4": 22,
+      "3": 9,
+      "2": 3,
+      "1": 2
+    },
+    "colors": ["#FFC0CB", "#98FF98", "#000000"],
+    "sizes": ["S", "M", "L"],
+    "description": "Light and elegant chiffon top with stylish ruffles. A graceful addition to your wardrobe that’s perfect for work, outings, or a date night.",
+    "reviews": [
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Simran Joshi",
+        "userRating": 5,
+        "comment": "Absolutely love this top! The material feels very premium and it's airy for hot days. Looks elegant when paired with skinny jeans or skirts."
+      },
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Divya Patel",
+        "userRating": 4,
+        "comment": "Good quality product. Looks very fashionable and trendy. I wear it often for meetings and always get compliments on the fit and ruffles."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "image": "feature3.png",
+    "productName": "Cotton Printed Kurti",
+    "productPrice": 1099,
+    "ratings": 4.6,
+    "category":"Women",
+    "ratingCount": 132,
+    "ratingBreakdown": {
+      "5": 90,
+      "4": 25,
+      "3": 10,
+      "2": 5,
+      "1": 2
+    },
+    "colors": ["#800000", "#FFDB58", "#008080"],
+    "sizes": ["S", "M", "L"],
+    "description": "Traditional Indian kurti with vibrant prints and breathable cotton fabric. Ideal for daily wear, offering unmatched comfort, a classic look, and ease of movement.",
+    "reviews": [
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Poonam Yadav",
+        "userRating": 5,
+        "comment": "Loved this kurti! It’s comfortable for long work hours and stylish enough for casual outings. The cotton is soft and breathable, especially in summers."
+      },
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Anjali Verma",
+        "userRating": 4,
+        "comment": "A must-have for everyday wear. The print is beautiful and it fits perfectly. Only suggestion is more color options in future collections."
+      }
+    ]
+  },
+  {
+    "id": 4,
+"image": "feature4.png",
+    "productName": "High-Waist Skinny Jeans",
+    "productPrice": 1499,
+    "ratings": 4.3,
+    "category":"Men",
+    "ratingCount": 105,
+    "ratingBreakdown": {
+      "5": 60,
+      "4": 30,
+      "3": 10,
+      "2": 3,
+      "1": 2
+    },
+    "colors": ["#1C1C1C", "#4682B4", "#A9A9A9"],
+    "sizes": ["S", "M", "L"],
+    "description": "Super stretch high-waist jeans that sculpt your shape beautifully. Comfortable for daily wear with a premium finish for a modern wardrobe essential.",
+    "reviews": [
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Kritika Mehra",
+        "userRating": 4,
+        "comment": "These jeans are my go-to for every outfit. The fit is tight but not uncomfortable. Stays in shape after multiple washes. Highly recommend!"
+      },
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Sneha Rao",
+        "userRating": 5,
+        "comment": "Love the way it hugs the body without being too tight. The fabric quality is amazing and perfect for both casual and party wear."
+      }
+    ]
+  },
+  {
+    "id": 5,
+"image": "feature4.png",
+    "productName": "Solid Sleeveless Jumpsuit",
+    "productPrice": 1799,
+    "ratings": 4.7,
+    "category":"Beauty",
+    "ratingCount": 97,
+    "ratingBreakdown": {
+      "5": 70,
+      "4": 20,
+      "3": 5,
+      "2": 1,
+      "1": 1
+    },
+    "colors": ["#722F37", "#808000", "#101010"],
+    "sizes": ["S", "M", "L"],
+    "description": "A chic sleeveless jumpsuit that flatters all body types. Stylish, comfortable, and a must-have for special events or evening hangouts with friends.",
+    "reviews": [
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Megha Rathi",
+        "userRating": 5,
+        "comment": "I wore this to a dinner party and everyone kept asking where I got it! It’s so flattering and feels premium on the skin."
+      },
+      {
+        "userImage": "../assets/users/avatar.png",
+        "userName": "Ritika Singh",
+        "userRating": 4,
+        "comment": "The jumpsuit is elegant and perfect for evenings. Loved the color and how it fits my waist. Just wish the zip was smoother."
+      }
+    ]
+  }
+]
