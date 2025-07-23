@@ -9,35 +9,46 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
-import productData from '../data/products.json'; // Adjust path if needed
+import { useWishlist } from '../contexts/WishlistContext';
 
 const { width } = Dimensions.get('window');
 const ITEM_WIDTH = width / 2 - 30;
 
+const imageMap = {
+  'feature1.png': require('../assets/products/feature1.png'),
+  'feature2.png': require('../assets/products/feature2.png'),
+  'feature3.png': require('../assets/products/feature3.png'),
+  'feature4.png': require('../assets/products/feature4.png'),
+};
+
 export default function WishlistScreen({ navigation }) {
-  const [products, setProducts] = useState([]);
+  const { wishlistItems } = useWishlist();
   const [activeTab, setActiveTab] = useState('All items');
 
-  useEffect(() => {
-    setProducts(productData);
-  }, []);
+  const renderProduct = ({ item }) => {
+    const imageSource = item.image.startsWith('local:')
+      ? imageMap[item.image.replace('local:', '')]
+      : { uri: item.image };
 
-  const renderProduct = ({ item }) => (
-    <View style={styles.card}>
-      <Image source={{ uri: item.image }} style={styles.image} />
-      <TouchableOpacity style={styles.heartIcon}>
-        <AntDesign name="heart" size={20} color="#F87171" />
-      </TouchableOpacity>
-      <Text style={styles.name}>{item.name}</Text>
-      <View style={styles.priceContainer}>
-        <Text style={styles.price}>{item.price}</Text>
-        {item.oldPrice && <Text style={styles.oldPrice}>{item.oldPrice}</Text>}
+    return (
+      <View style={styles.card}>
+        <Image source={imageSource} style={styles.image} />
+        <TouchableOpacity style={styles.heartIcon}>
+          <AntDesign name="heart" size={20} color="#F87171" />
+        </TouchableOpacity>
+        <Text style={styles.name}>{item.name}</Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>{item.price}</Text>
+          {item.oldPrice && (
+            <Text style={styles.oldPrice}>{item.oldPrice}</Text>
+          )}
+        </View>
+        <Text style={styles.rating}>
+          {'⭐'.repeat(Math.floor(item.rating))} ({item.reviews})
+        </Text>
       </View>
-      <Text style={styles.rating}>
-        {'⭐'.repeat(Math.floor(item.rating))} ({item.reviews})
-      </Text>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -60,47 +71,40 @@ export default function WishlistScreen({ navigation }) {
             styles.tabButton,
             activeTab === 'All items' && styles.activeTab,
           ]}
-          onPress={() => setActiveTab('All items')}
-        >
+          onPress={() => setActiveTab('All items')}>
           <Text
             style={[
               styles.tabText,
               activeTab === 'All items' && styles.activeTabText,
-            ]}
-          >
+            ]}>
             All items
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[
-            styles.tabButton,
-            activeTab === 'Boards' && styles.activeTab,
-          ]}
-          onPress={() => setActiveTab('Boards')}
-        >
+          style={[styles.tabButton, activeTab === 'Boards' && styles.activeTab]}
+          onPress={() => setActiveTab('Boards')}>
           <Text
             style={[
               styles.tabText,
               activeTab === 'Boards' && styles.activeTabText,
-            ]}
-          >
+            ]}>
             Boards
           </Text>
         </TouchableOpacity>
       </View>
 
-      {/* Product Grid */}
+      {/* Wishlist Items */}
       <FlatList
-        data={products}
+        data={wishlistItems}
         renderItem={renderProduct}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         contentContainerStyle={styles.productList}
-        showsVerticalScrollIndicator={false}
       />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

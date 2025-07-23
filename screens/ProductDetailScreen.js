@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useRoute } from '@react-navigation/native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const { width } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
 import { useCart } from '../contexts/CartContext';
+import { useWishlist } from '../contexts/WishlistContext';
 
 const ProductDetailScreen = () => {
   const route = useRoute();
@@ -21,16 +22,40 @@ const ProductDetailScreen = () => {
   const [selectedColor, setSelectedColor] = useState('#FADDCB');
   const [selectedSize, setSelectedSize] = useState('L');
   const { addToCart } = useCart();
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const navigation = useNavigation();
   const [showDescription, setShowDescription] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
+  const [wishlisted, setWishlisted] = useState(false);
+  const { addToWishlist, removeFromWishlist, isWishlisted } = useWishlist();
 
   const productImages = {
     'feature1.png': require('../assets/products/feature1.png'),
     'feature2.png': require('../assets/products/feature2.png'),
     'feature3.png': require('../assets/products/feature3.png'),
     'feature4.png': require('../assets/products/feature4.png'),
+  };
+
+  useEffect(() => {
+    setWishlisted(isWishlisted(product.id));
+  }, []);
+
+  const toggleWishlist = () => {
+    const wishlistItem = {
+      id: product.id,
+      name: product.productName,
+      price: `₹ ${product.productPrice}`,
+      oldPrice: product.oldPrice,
+      rating: product.ratings,
+      reviews: product.ratingCount,
+      image: `local:${product.image}`, // handle in WishlistScreen
+    };
+
+    if (wishlisted) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(wishlistItem);
+    }
+    setWishlisted(!wishlisted);
   };
   return (
     <View style={styles.container}>
@@ -47,13 +72,11 @@ const ProductDetailScreen = () => {
             onPress={() => navigation.navigate('App')}>
             <Ionicons name="chevron-back" size={22} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.wishBtn}
-            onPress={() => setIsWishlisted(!isWishlisted)}>
+          <TouchableOpacity style={styles.wishBtn} onPress={toggleWishlist}>
             <Ionicons
-              name={isWishlisted ? 'heart' : 'heart-outline'}
+              name={wishlisted ? 'heart' : 'heart-outline'}
               size={22}
-              color={isWishlisted ? 'red' : '#000'}
+              color={wishlisted ? 'red' : '#000'}
             />
           </TouchableOpacity>
         </View>

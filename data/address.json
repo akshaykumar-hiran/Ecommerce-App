@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "label": "My Home",
+    "mobile": "9876543210",
+    "address": "SBI Building, Street 3, Software Park",
+    "landmark": "Near SBI ATM",
+    "district": "Bangalore Urban",
+    "state": "Karnataka",
+    "country": "India",
+    "pincode": "560100",
+    "type": "home",
+    "icon": "home-outline"
+  },
+  {
+    "id": 2,
+    "label": "My Office",
+    "mobile": "9123456789",
+    "address": "ABC Tech Park, Tower B",
+    "landmark": "Next to Metro Station",
+    "district": "Bangalore Urban",
+    "state": "Karnataka",
+    "country": "India",
+    "pincode": "560103",
+    "type": "work",
+    "icon": "office-building-outline"
+  }
+]

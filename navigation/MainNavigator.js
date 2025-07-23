@@ -15,6 +15,7 @@ import CartScreen from "../screens/CartScreen";
 import MyOrdersScreen from "../screens/MyOrdersScreen";
 import OrderDetailsScreen from "../screens/OrderDetailScreen";
 import GiveRatingScreen from "../screens/GiveRatingScreen";
+import AddEditAddress from "../screens/AddEditAddress";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,8 @@ export default function MainNavigator() {
       <Stack.Screen name="MyOrders" component = {MyOrdersScreen}/>
       <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
       <Stack.Screen name="GiveRating" component={GiveRatingScreen} />
+      <Stack.Screen name="AddEditAddress" component={AddEditAddress} />
+
 
     </Stack.Navigator>
   );

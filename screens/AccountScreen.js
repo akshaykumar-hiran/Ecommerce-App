@@ -42,7 +42,7 @@ const AccountScreen = ({navigation}) => {
             icon="location-dot"
             label="Address"
             iconType="FontAwesome6"
-            onPress={() => {}}
+            onPress={() => {navigation.navigate('Address')}}
           />
           <ProfileItem
             icon="payments"
@@ -60,7 +60,7 @@ const AccountScreen = ({navigation}) => {
             icon="ticket-alt"
             label="Voucher"
             iconType="FontAwesome5"
-            onPress={() => {}}
+            onPress={() => {navigation.navigate('Voucher')}}
           />
           <ProfileItem
             icon="heart"
