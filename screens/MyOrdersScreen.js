@@ -5,6 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Platform,
+  SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -58,6 +61,7 @@ const ordersData = [
 
 const MyOrdersScreen = ({ navigation }) => {
   const [selectedTab, setSelectedTab] = useState('Pending');
+
   const filteredOrders = ordersData.filter(
     (order) => order.status === selectedTab
   );
@@ -65,11 +69,11 @@ const MyOrdersScreen = ({ navigation }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'Pending':
-        return '#FFA500'; // orange
+        return '#FFA500';
       case 'Delivered':
-        return '#2ECC71'; // green
+        return '#2ECC71';
       case 'Cancelled':
-        return '#FF3B30'; // red
+        return '#FF3B30';
       default:
         return '#000';
     }
@@ -81,72 +85,81 @@ const MyOrdersScreen = ({ navigation }) => {
         <Text style={styles.orderNumber}>Order {item.orderNumber}</Text>
         <Text style={styles.date}>{item.date}</Text>
       </View>
-      <Text style={styles.tracking}>Tracking number: {item.trackingNumber}</Text>
+      <Text style={styles.tracking}>
+        Tracking number: {item.trackingNumber}
+      </Text>
       <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
       <View style={styles.rowBetween}>
         <Text style={styles.subtotal}>Subtotal: ${item.subtotal}</Text>
-        <TouchableOpacity style={styles.detailsButton} onPress={()=>navigation.navigate('OrderDetails')}>
+        <TouchableOpacity
+          style={styles.detailsButton}
+          onPress={() => navigation.navigate('OrderDetails')}>
           <Text style={styles.detailsText}>Details</Text>
         </TouchableOpacity>
       </View>
-      <Text
-        style={[
-          styles.statusText,
-          { color: getStatusColor(item.status) },
-        ]}>
+      <Text style={[styles.statusText, { color: getStatusColor(item.status) }]}>
         {item.status.toUpperCase()}
       </Text>
     </View>
   );
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back" size={24} color="#000" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Orders</Text>
-        <Ionicons name="notifications-outline" size={24} color="#000" />
-      </View>
-
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        {['Pending', 'Delivered', 'Cancelled'].map((tab) => (
-          <TouchableOpacity
-            key={tab}
-            style={[styles.tabButton, selectedTab === tab && styles.activeTab]}
-            onPress={() => setSelectedTab(tab)}>
-            <Text
-              style={[
-                styles.tabText,
-                selectedTab === tab && styles.activeTabText,
-              ]}>
-              {tab}
-            </Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back" size={24} color="#000" />
           </TouchableOpacity>
-        ))}
-      </View>
+          <Text style={styles.headerTitle}>My Orders</Text>
+          <Ionicons name="notifications-outline" size={24} color="#000" />
+        </View>
 
-      {/* Orders List */}
-      <FlatList
-        data={filteredOrders}
-        keyExtractor={(item) => item.id}
-        renderItem={renderOrderItem}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      />
-    </View>
+        {/* Tabs */}
+        <View style={styles.tabContainer}>
+          {['Pending', 'Delivered', 'Cancelled'].map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              style={[
+                styles.tabButton,
+                selectedTab === tab && styles.activeTab,
+              ]}
+              onPress={() => setSelectedTab(tab)}>
+              <Text
+                style={[
+                  styles.tabText,
+                  selectedTab === tab && styles.activeTabText,
+                ]}>
+                {tab}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Orders List */}
+        <FlatList
+          data={filteredOrders}
+          keyExtractor={(item) => item.id}
+          renderItem={renderOrderItem}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default MyOrdersScreen;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 16,
-    paddingTop: 50,
   },
   header: {
     flexDirection: 'row',
@@ -188,10 +201,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 2,
+      },
+    }),
   },
   rowBetween: {
     flexDirection: 'row',
@@ -243,4 +263,3 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 });
-

@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import addressList from '../data/address.json';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function AddEditAddress({ navigation, route }) {
   const editData = route.params?.editData || null;
@@ -42,11 +43,20 @@ export default function AddEditAddress({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.formContainer}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="chevron-back" size={24} color="#000" />
+        </TouchableOpacity>
+
         <Text style={styles.title}>
           {editMode ? 'Edit Address' : 'Add New Address'}
         </Text>
 
+        {/* Empty View to balance the layout */}
+        <View style={{ width: 24 }} />
+      </View>
+
+      <ScrollView contentContainerStyle={styles.formContainer}>
         <TextInput
           placeholder="Name"
           style={styles.input}
@@ -142,11 +152,32 @@ export default function AddEditAddress({ navigation, route }) {
   );
 }
 
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 37,
+    paddingHorizontal: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#fff',
+  },
+
+  title: {
+    fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
+    textAlign: 'center',
+    flex: 1,
+    color: '#000',
+  },
+
   formContainer: { padding: 20 },
-  title: { fontSize: 18, fontFamily: 'Poppins_600SemiBold', marginBottom: 20 },
+
   input: {
     borderWidth: 1,
     borderColor: '#ccc',

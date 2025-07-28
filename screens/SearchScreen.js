@@ -7,64 +7,72 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Platform,
+  StatusBar,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SearchScreen = ({navigation}) => {
+const SearchScreen = ({ navigation }) => {
   const categories = [
     {
       id: 1,
-      image: require('../assets/Frame 33116.png'),
+      image: require('../assets/Frame-33116.png'),
     },
     {
       id: 2,
-      image: require('../assets/Frame 33124.png'),
+      image: require('../assets/Frame-33124.png'),
     },
     {
       id: 3,
-      image: require('../assets/Frame 33148.png'),
+      image: require('../assets/Frame-33148.png'),
     },
     {
       id: 4,
-      image: require('../assets/Frame 33149.png'),
+      image: require('../assets/Frame-33149.png'),
     },
   ];
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Ionicons name="menu" size={26} color="#2E221D" />
           </TouchableOpacity>
-        <Text style={styles.headerTitle}>Discover</Text>
-        <Ionicons name="notifications-outline" size={24} color="black" />
-      </View>
+          <Text style={styles.headerTitle}>Discover</Text>
+          <Ionicons name="notifications-outline" size={24} color="black" />
+        </View>
 
-      {/* Search Input */}
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#ccc" />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search"
-          placeholderTextColor="#aaa"
-        />
-        <TouchableOpacity style={styles.filterBtn}>
-          <Ionicons name="options-outline" size={20} color="#000" />
-        </TouchableOpacity>
-      </View>
+        {/* Search Input */}
+        <View style={styles.searchContainer}>
+          <Ionicons name="search" size={20} color="#ccc" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            placeholderTextColor="#aaa"
+          />
+          <TouchableOpacity style={styles.filterBtn}>
+            <Ionicons name="options-outline" size={20} color="#000" />
+          </TouchableOpacity>
+        </View>
 
-      {/* Categories List */}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ marginTop: 10 }}>
-        {categories.map((item) => (
-          <View key={item.id} style={styles.imageBox}>
-            <Image source={item.image} style={styles.bannerImage} />
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+        {/* Categories List */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 80, paddingTop: 10 }}>
+          {categories.map((item) => (
+            <View key={item.id} style={styles.imageBox}>
+              <Image source={item.image} style={styles.bannerImage} />
+            </View>
+          ))}
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -74,21 +82,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 37,
     paddingHorizontal: 16,
-    marginBottom:50,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 10,
   },
 
   headerTitle: {
     fontSize: 20,
     color: '#000',
-    fontFamily: 'Poppins_700Bold', // replaces fontWeight: 'bold'
+    fontFamily: 'Poppins_700Bold',
   },
 
   searchContainer: {

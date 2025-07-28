@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
+  Platform,
+  SafeAreaView,
 } from 'react-native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { useWishlist } from '../contexts/WishlistContext';
@@ -51,76 +53,88 @@ export default function WishlistScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu" size={24} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>My Wishlist</Text>
-        <View>
-          <Ionicons name="notifications-outline" size={24} />
-          <View style={styles.notificationDot} />
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Ionicons name="menu" size={24} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>My Wishlist</Text>
+          <View>
+            <Ionicons name="notifications-outline" size={24} />
+            <View style={styles.notificationDot} />
+          </View>
         </View>
-      </View>
 
-      {/* Tabs */}
-      <View style={styles.tabs}>
-        <TouchableOpacity
-          style={[
-            styles.tabButton,
-            activeTab === 'All items' && styles.activeTab,
-          ]}
-          onPress={() => setActiveTab('All items')}>
-          <Text
+        {/* Tabs */}
+        <View style={styles.tabs}>
+          <TouchableOpacity
             style={[
-              styles.tabText,
-              activeTab === 'All items' && styles.activeTabText,
-            ]}>
-            All items
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, activeTab === 'Boards' && styles.activeTab]}
-          onPress={() => setActiveTab('Boards')}>
-          <Text
+              styles.tabButton,
+              activeTab === 'All items' && styles.activeTab,
+            ]}
+            onPress={() => setActiveTab('All items')}>
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === 'All items' && styles.activeTabText,
+              ]}>
+              All items
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.tabText,
-              activeTab === 'Boards' && styles.activeTabText,
-            ]}>
-            Boards
-          </Text>
-        </TouchableOpacity>
-      </View>
+              styles.tabButton,
+              activeTab === 'Boards' && styles.activeTab,
+            ]}
+            onPress={() => setActiveTab('Boards')}>
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === 'Boards' && styles.activeTabText,
+              ]}>
+              Boards
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* Wishlist Items */}
-      <FlatList
-        data={wishlistItems}
-        renderItem={renderProduct}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.productList}
-      />
-    </View>
+        {/* Wishlist Items */}
+        <FlatList
+          data={wishlistItems}
+          renderItem={renderProduct}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.productList}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 50,
+  },
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 0 : 50,
     paddingHorizontal: 20,
+    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 10,
   },
   headerText: {
     fontSize: 18,
     fontWeight: '600',
     fontFamily: 'Poppins_600SemiBold',
+    color: '#000',
   },
   notificationDot: {
     height: 8,
@@ -128,8 +142,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'red',
     position: 'absolute',
-    right: -2,
-    top: -2,
+    right: Platform.OS === 'ios' ? -2 : -2,
+    top: Platform.OS === 'ios' ? -2 : -1,
   },
   tabs: {
     flexDirection: 'row',
@@ -148,17 +162,17 @@ const styles = StyleSheet.create({
   tabText: {
     color: '#000',
     fontFamily: 'Poppins_400Regular',
+    fontSize: 13,
   },
   activeTabText: {
     color: '#fff',
-    fontWeight: '600',
     fontFamily: 'Poppins_600SemiBold',
   },
   activeTab: {
     backgroundColor: '#000',
   },
   productList: {
-    paddingBottom: 80,
+    paddingBottom: Platform.OS === 'ios' ? 100 : 80,
   },
   card: {
     width: ITEM_WIDTH,
@@ -178,6 +192,7 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 2,
   },
   price: {
     fontWeight: 'bold',
@@ -193,6 +208,7 @@ const styles = StyleSheet.create({
     color: '#555',
     marginTop: 5,
     fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
   },
   heartIcon: {
     position: 'absolute',
@@ -201,5 +217,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 15,
     padding: 5,
+    zIndex: 1,
   },
 });

@@ -14,7 +14,7 @@ import {
   FontAwesome5,
 } from '@expo/vector-icons';
 
-const AccountScreen = ({navigation}) => {
+const AccountScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -31,7 +31,7 @@ const AccountScreen = ({navigation}) => {
             <Text style={styles.name}>Akshay Kumar Hiran</Text>
             <Text style={styles.email}>akshaykumarhiran2@gmail.com</Text>
           </View>
-          <TouchableOpacity onPress={()=>navigation.navigate('Settings')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
             <Ionicons name="settings-sharp" size={26} color="black" />
           </TouchableOpacity>
         </View>
@@ -42,7 +42,9 @@ const AccountScreen = ({navigation}) => {
             icon="location-dot"
             label="Address"
             iconType="FontAwesome6"
-            onPress={() => {navigation.navigate('Address')}}
+            onPress={() => {
+              navigation.navigate('Address');
+            }}
           />
           <ProfileItem
             icon="payments"
@@ -54,13 +56,17 @@ const AccountScreen = ({navigation}) => {
             icon="shopping-bag"
             label="My Orders"
             iconType="MaterialIcons"
-            onPress={() => {navigation.navigate('MyOrders')}}
+            onPress={() => {
+              navigation.navigate('MyOrders');
+            }}
           />
           <ProfileItem
             icon="ticket-alt"
             label="Voucher"
             iconType="FontAwesome5"
-            onPress={() => {navigation.navigate('Voucher')}}
+            onPress={() => {
+              navigation.navigate('Voucher');
+            }}
           />
           <ProfileItem
             icon="heart"
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: 70,
     paddingHorizontal: 16,
-    marginBottom:50
+    marginBottom: 50,
   },
 
   profileContainer: {

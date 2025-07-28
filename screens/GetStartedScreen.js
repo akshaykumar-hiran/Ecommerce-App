@@ -1,18 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 
 export default function GetStartedScreen({ navigation }) {
   return (
     <ImageBackground
-      source={require('../assets/welcome.png')} 
+      source={require('../assets/welcome.png')}
       style={styles.background}
-      resizeMode="cover"
-    >
+      resizeMode="cover">
       <View style={styles.overlay}>
         <Text style={styles.title}>Welcome to GemStore!</Text>
         <Text style={styles.subtitle}>The home for a fashionista</Text>
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Auth')}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Auth')}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>
@@ -29,7 +36,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 60,
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)', 
+    backgroundColor: 'rgba(0,0,0,0.6)',
   },
   title: {
     fontSize: 24,
@@ -42,7 +49,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#fff',
-    fontFamily:'Poppins_600SemiBold',
+    fontFamily: 'Poppins_600SemiBold',
     marginBottom: 30,
     textAlign: 'center',
   },
@@ -56,9 +63,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontFamily:'Poppins_600SemiBold',
+    fontFamily: 'Poppins_600SemiBold',
     fontSize: 16,
     fontWeight: '600',
   },
 });
-

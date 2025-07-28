@@ -1,4 +1,3 @@
-
 import {
   View,
   Text,
@@ -87,10 +86,10 @@ export default function SignupScreen({ navigation }) {
         onChangeText={setConfirmPassword}
       />
 
-      <TouchableOpacity style={styles.signupButton} 
-      // onPress={handleSignup}
-      onPress={()=>navigation.navigate('App')}
-      >
+      <TouchableOpacity
+        style={styles.signupButton}
+        // onPress={handleSignup}
+        onPress={() => navigation.navigate('App')}>
         <Text style={styles.signupButtonText}>SIGN UP</Text>
       </TouchableOpacity>
 

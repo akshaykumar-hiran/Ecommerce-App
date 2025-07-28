@@ -7,8 +7,6 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-;
-
 export default function OrderDetailsScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
@@ -81,7 +79,9 @@ export default function OrderDetailsScreen({ navigation }) {
         <TouchableOpacity style={styles.homeButton}>
           <Text style={styles.homeButtonText}>Return home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rateButton} onPress={()=>navigation.navigate('GiveRating')}>
+        <TouchableOpacity
+          style={styles.rateButton}
+          onPress={() => navigation.navigate('GiveRating')}>
           <Text style={styles.rateButtonText}>Rate</Text>
         </TouchableOpacity>
       </View>

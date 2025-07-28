@@ -167,4 +167,3 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins_600SemiBold',
   },
 });
-

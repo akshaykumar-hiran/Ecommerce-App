@@ -43,8 +43,7 @@ export default function AppStack() {
 
           return <Ionicons name={iconName} size={24} color={color} />;
         },
-      })}
-    >
+      })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />

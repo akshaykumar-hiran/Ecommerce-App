@@ -5,11 +5,14 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Platform,
+  StatusBar,
+  KeyboardAvoidingView,
 } from 'react-native';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import products from '../data/products.json';
 
 const HomeScreen = ({ navigation }) => {
@@ -23,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
     );
     setFeaturedProducts(filtered);
   }, [activeCategory]);
+
   const productImages = {
     'feature1.png': require('../assets/products/feature1.png'),
     'feature2.png': require('../assets/products/feature2.png'),
@@ -31,98 +35,114 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu" size={26} color="#2E221D" />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>GemStore</Text>
-
-        <TouchableOpacity onPress={onNotificationPress}>
-          <Ionicons name="notifications-outline" size={26} color="#2E221D" />
-        </TouchableOpacity>
-      </View>
-
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        {[
-          { name: 'Women', image: require('../assets/categories/women.png') },
-          { name: 'Men', image: require('../assets/categories/men.png') },
-          {
-            name: 'Accessories',
-            image: require('../assets/categories/accessories.png'),
-          },
-          {
-            name: 'Beauty',
-            image: require('../assets/categories/beauty.png'),
-          },
-        ].map((item) => {
-          const isActive = activeCategory === item.name;
-          return (
-            <TouchableOpacity
-              key={item.name}
-              style={styles.tabItem}
-              onPress={() => setActiveCategory(item.name)}>
-              <View
-                style={[
-                  styles.circle,
-                  isActive ? styles.circleActive : styles.circleInactive,
-                ]}>
-                <Image
-                  source={item.image}
-                  style={[
-                    styles.icon,
-                    isActive ? styles.iconActive : styles.iconInactive,
-                  ]}
-                />
-              </View>
-              <Text style={isActive ? styles.tabTextActive : styles.tabText}>
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Banner */}
-        <View style={styles.bannerContainer}>
-          <Image
-            style={styles.bannerImage}
-            source={require('../assets/Mask Group.png')}
-          />
-          <Text style={styles.bannerText}>Autumn Collection 2022</Text>
-        </View>
-
-        {/* Featured Products */}
-        <View style={styles.featuredContainer}>
-          <Text style={styles.sectionTitle}>Feature Products</Text>
-          <Text style={styles.showAll}>Show all</Text>
-        </View>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}>
         <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.productScroll}>
-          {featuredProducts.map((item) => (
-            <TouchableOpacity
-              key={item.id}
-              onPress={() =>
-                navigation.navigate('ProductDetail', { product: item })
-              }>
-              <View style={styles.productCard}>
-                <Image
-                  source={productImages[item.image]} // ✅ Fix here
-                  style={styles.productImage}
-                />
-                <Text style={styles.productName}>{item.productName}</Text>
-                <Text style={styles.productPrice}>₹ {item.productPrice}</Text>
-              </View>
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 80 }}>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <Ionicons name="menu" size={26} color="#2E221D" />
             </TouchableOpacity>
-          ))}
+
+            <Text style={styles.title}>GemStore</Text>
+
+            <TouchableOpacity onPress={onNotificationPress}>
+              <Ionicons
+                name="notifications-outline"
+                size={26}
+                color="#2E221D"
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Tabs */}
+          <View style={styles.tabContainer}>
+            {[
+              {
+                name: 'Women',
+                image: require('../assets/categories/women.png'),
+              },
+              { name: 'Men', image: require('../assets/categories/men.png') },
+              {
+                name: 'Accessories',
+                image: require('../assets/categories/accessories.png'),
+              },
+              {
+                name: 'Beauty',
+                image: require('../assets/categories/beauty.png'),
+              },
+            ].map((item) => {
+              const isActive = activeCategory === item.name;
+              return (
+                <TouchableOpacity
+                  key={item.name}
+                  style={styles.tabItem}
+                  onPress={() => setActiveCategory(item.name)}>
+                  <View
+                    style={[
+                      styles.circle,
+                      isActive ? styles.circleActive : styles.circleInactive,
+                    ]}>
+                    <Image
+                      source={item.image}
+                      style={[
+                        styles.icon,
+                        isActive ? styles.iconActive : styles.iconInactive,
+                      ]}
+                    />
+                  </View>
+                  <Text
+                    style={isActive ? styles.tabTextActive : styles.tabText}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          {/* Banner */}
+          <View style={styles.bannerContainer}>
+            <Image
+              style={styles.bannerImage}
+              source={require('../assets/Mask-Group.png')}
+            />
+            <Text style={styles.bannerText}>Autumn Collection 2022</Text>
+          </View>
+
+          {/* Featured Products */}
+          <View style={styles.featuredContainer}>
+            <Text style={styles.sectionTitle}>Feature Products</Text>
+            <Text style={styles.showAll}>Show all</Text>
+          </View>
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.productScroll}>
+            {featuredProducts.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                onPress={() =>
+                  navigation.navigate('ProductDetail', { product: item })
+                }>
+                <View style={styles.productCard}>
+                  <Image
+                    source={productImages[item.image]}
+                    style={styles.productImage}
+                  />
+                  <Text style={styles.productName}>{item.productName}</Text>
+                  <Text style={styles.productPrice}>₹ {item.productPrice}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </ScrollView>
-      </ScrollView>
-    </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -132,8 +152,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 37,
     paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    backgroundColor: '#fff',
+  },
+
+  title: {
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'Poppins_700Bold',
   },
 
   tabContainer: {
@@ -141,6 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginVertical: 20,
   },
+
   tabItem: {
     alignItems: 'center',
   },
@@ -187,20 +223,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 5,
-    paddingVertical: 1,
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 20,
-    color: 'black',
-    fontFamily: 'Poppins_700Bold',
-  },
-
   bannerContainer: {
     position: 'relative',
     borderRadius: 15,
@@ -244,6 +266,7 @@ const styles = StyleSheet.create({
   productScroll: {
     flexDirection: 'row',
     marginBottom: 60,
+    paddingHorizontal: 4,
   },
 
   productCard: {

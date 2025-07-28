@@ -14,8 +14,7 @@ export default function DrawerNavigator() {
         headerShown: false,
         drawerPosition: 'left',
       }}
-      drawerContent={(props) => <CustomDrawer {...props} />}
-    >
+      drawerContent={(props) => <CustomDrawer {...props} />}>
       <Drawer.Screen name="MainTabs" component={AppStack} />
     </Drawer.Navigator>
   );

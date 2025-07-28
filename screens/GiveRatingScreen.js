@@ -16,7 +16,7 @@ const RateProductScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-     {/* Back Button */}
+      {/* Back Button */}
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}>
@@ -29,11 +29,7 @@ const RateProductScreen = ({ navigation }) => {
       {/* Banner */}
       <TouchableOpacity style={styles.banner}>
         <FontAwesome name="gift" size={20} color="#fff" />
-        <Text style={styles.bannerText}>
-          
-          Submit your review now!
-        </Text>
-        
+        <Text style={styles.bannerText}>Submit your review now!</Text>
       </TouchableOpacity>
 
       {/* Star Rating */}

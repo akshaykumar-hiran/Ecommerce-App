@@ -6,9 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AccountScreen from '../screens/AccountScreen';
 import WishlistScreen from '../screens/WishlistScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import AddressScreen from "../screens/DeliveryAddressScreen";
-import VoucherScreen from "../screens/VoucherScreen";
-import AddEditAddress from "../screens/AddEditAddress";
+import AddressScreen from '../screens/DeliveryAddressScreen';
+import VoucherScreen from '../screens/VoucherScreen';
+import AddEditAddress from '../screens/AddEditAddress';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,8 +21,6 @@ export default function AccountStack() {
       <Stack.Screen name="Address" component={AddressScreen} />
       <Stack.Screen name="Voucher" component={VoucherScreen} />
       <Stack.Screen name="AddeditAddress" component={AddEditAddress} />
-
-      
     </Stack.Navigator>
   );
 }

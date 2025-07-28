@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -12,7 +18,7 @@ const vouchers = [
     code: 'fridaysale',
     expiry: '20\nDec',
     color: '#1C1C1E',
-    textColor: '#fff'
+    textColor: '#fff',
   },
   {
     id: 2,
@@ -22,7 +28,7 @@ const vouchers = [
     code: 'holiday30',
     expiry: '22\nDec',
     color: '#6D6D6D',
-    textColor: '#fff'
+    textColor: '#fff',
   },
   {
     id: 3,
@@ -32,7 +38,7 @@ const vouchers = [
     code: 'welcome',
     expiry: '28\nDec',
     color: '#B0B0B0',
-    textColor: '#fff'
+    textColor: '#fff',
   },
 ];
 
@@ -51,13 +57,18 @@ export default function VoucherScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.voucherList}>
         {vouchers.map((voucher) => (
           <View key={voucher.id} style={styles.card}>
-            <View style={[styles.percentBox, { backgroundColor: voucher.color }]}>
-              <Text style={[styles.percentText, { color: voucher.textColor }]}>{voucher.percent}</Text>
+            <View
+              style={[styles.percentBox, { backgroundColor: voucher.color }]}>
+              <Text style={[styles.percentText, { color: voucher.textColor }]}>
+                {voucher.percent}
+              </Text>
             </View>
             <View style={styles.details}>
               <Text style={styles.title}>{voucher.title}</Text>
               <Text style={styles.subtitle}>{voucher.subtitle}</Text>
-              <Text style={styles.code}>Code: <Text style={{ fontWeight: '600' }}>{voucher.code}</Text></Text>
+              <Text style={styles.code}>
+                Code: <Text style={{ fontWeight: '600' }}>{voucher.code}</Text>
+              </Text>
             </View>
             <View style={styles.expiry}>
               <Text style={styles.exp}>Exp.</Text>
@@ -75,6 +86,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'Poppins_400Regular',
+    paddingTop: 37,
+    paddingHorizontal: 16,
   },
   header: {
     flexDirection: 'row',
@@ -97,7 +110,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9',
     borderRadius: 12,
     padding: 14,
-    marginBottom: 16,
+    marginBottom: 10,
+    marginTop: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOpacity: 0.04,

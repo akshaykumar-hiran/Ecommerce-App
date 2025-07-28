@@ -105,6 +105,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     fontFamily: 'Poppins_400Regular',
+    paddingTop: 37,
+    paddingHorizontal: 16,
   },
   header: {
     flexDirection: 'row',
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
     padding: 16,
-    marginVertical: 10,
+    marginVertical: 15,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1.2,
